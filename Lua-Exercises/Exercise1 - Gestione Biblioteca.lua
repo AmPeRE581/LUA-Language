@@ -85,9 +85,9 @@ function Library:returnBook(title)
     local book = self:findBookByTitle(title)
     if book and not book.available then
         book.available = true
-        print("Book '" .. title .. "' has been returned.")
+        print("Libro '" .. Titolo .. "' è stato ritornato indietro alla libreria.")
     else
-        print("Book '" .. title .. "' was not lent out.")
+        print("Libro '" .. Titolo .. "' non è stato ritornato indietro alla libreria.")
     end
 end
 
@@ -101,46 +101,46 @@ end
 local myLibrary = Library:new()
 
 while true do
-    print("\nLibrary Management System")
-    print("1. Add Book")
-    print("2. Search Book by Title")
-    print("3. Search Book by Author")
-    print("4. Lend Book")
-    print("5. Return Book")
-    print("6. Display All Books")
-    print("7. Exit")
-    io.write("Select an option: ")
+    print("\nSistema di gestione della libreria")
+    print("1. Aggiungi un libro")
+    print("2. Cerca un libro per titolo")
+    print("3. Cerca un libro per autore")
+    print("4. Presta un libro")
+    print("5. Ritorna indietro il libro")
+    print("6. Mostra tutti i libri")
+    print("7. Esci")
+    io.write("Seleziona un opzione: ")
     local choice = io.read("*n")
 
     if choice == 1 then
-        io.write("Enter title: ")
+        io.write("Inserisca il titolo: ")
         local title = io.read()
-        io.write("Enter author: ")
+        io.write("Inserisca l'autore: ")
         local author = io.read()
-        io.write("Enter year: ")
+        io.write("Inserisca l'anno: ")
         local year = io.read("*n")
         local book = Book:new(title, author, year)
         myLibrary:addBook(book)
-        print("Book added successfully.")
+        print("Libro aggiunto con successo.")
 
     elseif choice == 2 then
-        io.write("Enter title: ")
+        io.write("Inserisca il titolo: ")
         local title = io.read()
         local book = myLibrary:findBookByTitle(title)
         if book then
             book:display()
         else
-            print("Book not found.")
+            print("Libro non trovato.")
         end
 
     elseif choice == 3 then
-        io.write("Enter author: ")
+        io.write("Inserisca l'autore: ")
         local author = io.read()
         local book = myLibrary:findBookByAuthor(author)
         if book then
             book:display()
         else
-            print("Book not found.")
+            print("Libro non trovato.")
         end
 
     elseif choice == 4 then
@@ -160,6 +160,6 @@ while true do
         break
 
     else
-        print("Invalid choice, please try again.")
+        print("Scelta non valida, si prega di riprovare.")
     end
 end
