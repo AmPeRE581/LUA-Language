@@ -21,11 +21,11 @@
 Book = {}
 Book.__index = Book
 
-function Book:new(title, author, year)
+function Book:new(Titolo, Autore, Anno)
     local book = {
-        title = title,
-        author = author,
-        year = year,
+        title = Titolo,
+        author = Autore,
+        year = Anno,
         available = true
     }
     setmetatable(book, Book)
@@ -62,7 +62,7 @@ function Library:findBookByTitle(title)
     return nil
 end
 
-function Library:findBookByAuthor(author)
+function Library:findBookByAuthor(Autore)
     for _, book in ipairs(self.books) do
         if book.author == author then
             return book
@@ -71,8 +71,8 @@ function Library:findBookByAuthor(author)
     return nil
 end
 
-function Library:lendBook(title)
-    local book = self:findBookByTitle(title)
+function Library:lendBook(Titolo)
+    local book = self:findBookByTitle(Titolo)
     if book and book.available then
         book.available = false
         print("Libro '" .. Titolo .. "' é stato restituito.")
@@ -81,8 +81,8 @@ function Library:lendBook(title)
     end
 end
 
-function Library:returnBook(title)
-    local book = self:findBookByTitle(title)
+function Library:returnBook(Titolo)
+    local book = self:findBookByTitle(Titolo)
     if book and not book.available then
         book.available = true
         print("Libro '" .. Titolo .. "' è stato ritornato indietro alla libreria.")
