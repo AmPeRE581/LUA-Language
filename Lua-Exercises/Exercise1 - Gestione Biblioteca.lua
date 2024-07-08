@@ -21,11 +21,11 @@
 Book = {}
 Book.__index = Book
 
-function Book:new(Titolo, Autore, Anno)
+function Book:new(title, author, year)
     local book = {
-        title = Titolo,
-        author = Autore,
-        year = Anno,
+        title = title,
+        author = author,
+        year = year,
         available = true
     }
     setmetatable(book, Book)
@@ -33,8 +33,8 @@ function Book:new(Titolo, Autore, Anno)
 end
 
 function Book:display()
-    local status = self.available and "Disponibile" or "Non disponibile"
-    print("Title: " .. self.title .. ", Autore: " .. self.author .. ", Anno: " .. self.year .. ", Status: " .. status)
+    local status = self.available and "Available" or "Not Available"
+    print("Title: " .. self.title .. ", Author: " .. self.author .. ", Year: " .. self.year .. ", Status: " .. status)
 end
 
 -- Definizione della classe Library
@@ -62,7 +62,7 @@ function Library:findBookByTitle(title)
     return nil
 end
 
-function Library:findBookByAuthor(Autore)
+function Library:findBookByAuthor(author)
     for _, book in ipairs(self.books) do
         if book.author == author then
             return book
@@ -71,23 +71,23 @@ function Library:findBookByAuthor(Autore)
     return nil
 end
 
-function Library:lendBook(Titolo)
-    local book = self:findBookByTitle(Titolo)
+function Library:lendBook(title)
+    local book = self:findBookByTitle(title)
     if book and book.available then
         book.available = false
-        print("Libro '" .. Titolo .. "' é stato restituito.")
+        print("Book '" .. title .. "' has been lent out.")
     else
-        print("Libro '" .. Titolo .. "' non è disponibile.")
+        print("Book '" .. title .. "' is not available.")
     end
 end
 
-function Library:returnBook(Titolo)
-    local book = self:findBookByTitle(Titolo)
+function Library:returnBook(title)
+    local book = self:findBookByTitle(title)
     if book and not book.available then
         book.available = true
-        print("Libro '" .. Titolo .. "' è stato ritornato indietro alla libreria.")
+        print("Book '" .. title .. "' has been returned.")
     else
-        print("Libro '" .. Titolo .. "' non è stato ritornato indietro alla libreria.")
+        print("Book '" .. title .. "' was not lent out.")
     end
 end
 
@@ -101,46 +101,46 @@ end
 local myLibrary = Library:new()
 
 while true do
-    print("\nSistema di gestione della libreria")
-    print("1. Aggiungi un libro")
-    print("2. Cerca un libro per titolo")
-    print("3. Cerca un libro per autore")
-    print("4. Presta un libro")
-    print("5. Ritorna indietro il libro")
-    print("6. Mostra tutti i libri")
-    print("7. Esci")
-    io.write("Seleziona un opzione: ")
+    print("\nLibrary Management System")
+    print("1. Add Book")
+    print("2. Search Book by Title")
+    print("3. Search Book by Author")
+    print("4. Lend Book")
+    print("5. Return Book")
+    print("6. Display All Books")
+    print("7. Exit")
+    io.write("Select an option: ")
     local choice = io.read("*n")
 
     if choice == 1 then
-        io.write("Inserisca il titolo: ")
+        io.write("Enter title: ")
         local title = io.read()
-        io.write("Inserisca l'autore: ")
+        io.write("Enter author: ")
         local author = io.read()
-        io.write("Inserisca l'anno: ")
+        io.write("Enter year: ")
         local year = io.read("*n")
         local book = Book:new(title, author, year)
         myLibrary:addBook(book)
-        print("Libro aggiunto con successo.")
+        print("Book added successfully.")
 
     elseif choice == 2 then
-        io.write("Inserisca il titolo: ")
+        io.write("Enter title: ")
         local title = io.read()
         local book = myLibrary:findBookByTitle(title)
         if book then
             book:display()
         else
-            print("Libro non trovato.")
+            print("Book not found.")
         end
 
     elseif choice == 3 then
-        io.write("Inserisca l'autore: ")
+        io.write("Enter author: ")
         local author = io.read()
         local book = myLibrary:findBookByAuthor(author)
         if book then
             book:display()
         else
-            print("Libro non trovato.")
+            print("Book not found.")
         end
 
     elseif choice == 4 then
@@ -160,6 +160,6 @@ while true do
         break
 
     else
-        print("Scelta non valida, si prega di riprovare.")
+        print("Invalid choice, please try again.")
     end
 end
