@@ -33,8 +33,8 @@ function Book:new(title, author, year)
 end
 
 function Book:display()
-    local status = self.available and "Available" or "Not Available"
-    print("Title: " .. self.title .. ", Author: " .. self.author .. ", Year: " .. self.year .. ", Status: " .. status)
+    local status = self.available and "Disponibile" or "Non disponibile"
+    print("Title: " .. self.title .. ", Autore: " .. self.author .. ", Anno: " .. self.year .. ", Status: " .. status)
 end
 
 -- Definizione della classe Library
@@ -75,9 +75,9 @@ function Library:lendBook(title)
     local book = self:findBookByTitle(title)
     if book and book.available then
         book.available = false
-        print("Book '" .. title .. "' has been lent out.")
+        print("Libro '" .. Titolo .. "' é stato restituito.")
     else
-        print("Book '" .. title .. "' is not available.")
+        print("Libro '" .. Titolo .. "' non è disponibile.")
     end
 end
 
